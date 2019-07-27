@@ -56,6 +56,7 @@ class TemplateSkill(MycroftSkill):
         ipAddress = message.data.get("IPADDRESS", None)
         ipaddr = str(ipAddress)
         ipaddr.replace(" ", "", 4)
+        print(ipaddr)
         nm = NmapProcess(ipaddr)
         nm.run()
 
