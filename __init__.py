@@ -10,7 +10,7 @@
 from adapt.intent import IntentBuilder
 from mycroft.skills.core import MycroftSkill, intent_handler
 from mycroft.util.log import LOG
-import nmap
+from libnmap.process import NmapProcess
 # Each skill is contained within its own class, which inherits base methods
 # from the MycroftSkill class.  You extend this class as shown below.
 
@@ -54,23 +54,15 @@ class TemplateSkill(MycroftSkill):
     def handle_ip_scan_intent(self, message):
         ipAddress = message.data.get("IPADDRESS", None)
         ipaddr = str(ipAddress)
-        ipaddr.replace(" ", "", 4)
-        import nmap # import nmap.py module
-        nm = nmap.PortScanner() # instantiate nmap.PortScanner object
-        nm.scan('127.0.0.1', '22-443')
-        for host in nm.all_hosts():
-            print('----------------------------------------------------')
-            print('Host : %s (%s)' % (host, nm[host].hostname()))
-            print('State : %s' % nm[host].state())
-            self.speak_dialog("nmap.scan", data={"results": host + nm['state']})
-            for proto in nm[host].all_protocols():
-                print('----------')
-                print('Protocol : %s' % proto)
+        ipaddr.replace(" ", "", 4
 
-                lport = nm[host][proto].keys()
-                lport.sort()
-                for port in lport()
-                    self.speak_dialog("nmap.scan", data={"results": host + nm[host][proto][port]['state']})
+        nm = NmapProcess("scanme.nmap.org", options="-sV")
+        rc = nm.run()
+
+        if nm.rc == 0:
+            print (nm.stdout)
+        else:
+            print (nm.stderr)
 
 
 
