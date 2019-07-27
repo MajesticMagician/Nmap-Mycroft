@@ -62,7 +62,7 @@ class TemplateSkill(MycroftSkill):
         nmap_report = NmapParser.parse(nm.stdout)
 
         for scanned_hosts in nmap_report.hosts:
-            print scanned_hosts
+            print (scanned_hosts)
             self.speak_dialog("nmap.scan", data={"results": scanned_hosts})
     # The "stop" method defines what Mycroft does when told to stop during
     # the skill's execution. In this case, since the skill's functionality
