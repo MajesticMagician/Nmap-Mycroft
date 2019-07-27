@@ -57,12 +57,6 @@ class TemplateSkill(MycroftSkill):
         ipaddr.replace(" ", "", 4)
         nmScan.scan('127.0.0.1', '21-443')
         print('Host : %s (%s)' % (host, nmScan[host].hostname()))
-        print('State : %s' % nmScan[host].state())
-        print('----------')
-        print('Protocol : %s' % proto)
-        lport = nmScan[host][proto].keys()
-        lport.sort
-        print ('port : %s\tstate : %s' % (port, nmScan[host][proto][port]['state'])
 
     # The "stop" method defines what Mycroft does when told to stop during
     # the skill's execution. In this case, since the skill's functionality
