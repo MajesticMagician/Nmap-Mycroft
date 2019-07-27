@@ -56,7 +56,11 @@ class TemplateSkill(MycroftSkill):
         ipaddr = str(ipAddress)
         ipaddr.replace(" ", "", 4)
         nm = nmap.PortScanner() # instantiate nmap.PortScanner object
-        self.speak_dialog("nmap.scan", data={"results": nm.scan('127.0.0.1', '22-443')})
+        scanresults = str(nm['192.168.0.1'].has_tcp(80))
+        if('True' in scanresults):
+            self.speak_dialog("nmap.scan", data={"results": "Port 80 is open"})
+        else:
+            self.speak_dialog("nmap.scan", data={"results": "Port 80 is not open"})
 
 
     # The "stop" method defines what Mycroft does when told to stop during
