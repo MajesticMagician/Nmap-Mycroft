@@ -57,11 +57,12 @@ class TemplateSkill(MycroftSkill):
         ipaddr.replace(" ", "", 4)
         import nmap # import nmap.py module
         nm = nmap.PortScanner() # instantiate nmap.PortScanner object
-        nm.scan('127.0.0.1', '22-443') 
+        nm.scan('127.0.0.1', '22-443')
         for host in nm.all_hosts():
             print('----------------------------------------------------')
             print('Host : %s (%s)' % (host, nm[host].hostname()))
             print('State : %s' % nm[host].state())
+            self.speak_dialog("nmap.scan", data={"results": host})
 
 
     # The "stop" method defines what Mycroft does when told to stop during
