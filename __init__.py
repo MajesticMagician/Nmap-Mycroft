@@ -68,8 +68,6 @@ class TemplateSkill(MycroftSkill):
                 for port in lport:
                     print ('port : %s\tstate : %s' % (port, nmScan[host][proto][port]['state'])
 
-        self.speak_dialog("nmap.scan", data={"results": })
-
     # The "stop" method defines what Mycroft does when told to stop during
     # the skill's execution. In this case, since the skill's functionality
     # is extremely simple, there is no need to override it.  If you DO
