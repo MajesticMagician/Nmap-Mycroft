@@ -55,6 +55,7 @@ class TemplateSkill(MycroftSkill):
         ipAddress = message.data.get("IPADDRESS", None)
         ipaddr = str(ipAddress)
         ipaddr.replace(" ", "", 4)
+        nmScan = nmap.PortScanner()
         nmScan.scan('127.0.0.1', '21-443')
         print('Host : %s (%s)' % (host, nmScan[host].hostname()))
 
