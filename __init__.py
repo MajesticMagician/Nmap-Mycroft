@@ -62,7 +62,7 @@ class TemplateSkill(MycroftSkill):
             print('----------------------------------------------------')
             print('Host : %s (%s)' % (host, nm[host].hostname()))
             print('State : %s' % nm[host].state())
-            self.speak_dialog("nmap.scan", data={"results": host})
+            self.speak_dialog("nmap.scan", data={"results": host + ['state']})
 
 
     # The "stop" method defines what Mycroft does when told to stop during
