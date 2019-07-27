@@ -54,7 +54,7 @@ class TemplateSkill(MycroftSkill):
     def handle_ip_scan_intent(self, message):
         ipAddress = message.data.get("IPADDRESS", None)
         ipaddr = str(ipAddress)
-        ipaddr.replace("point", ".", 4)
+        ipaddr.replace(" ", "", 4)
         nmScan = nmap.PortScanner()
         nmScan.scan(ipaddr, '21-443')
         self.speak_dialog("count.is.now", data={"count": self.count})
