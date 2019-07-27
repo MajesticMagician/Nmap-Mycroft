@@ -56,7 +56,7 @@ class TemplateSkill(MycroftSkill):
         ipaddr = str(ipAddress)
         ipaddr.replace("point", ".", 4)
         nmScan = nmap.PortScanner()
-        nmScan.scan(ipAddress, '21-443')
+        nmScan.scan(ipaddr, '21-443')
         self.speak_dialog("count.is.now", data={"count": self.count})
 
     # The "stop" method defines what Mycroft does when told to stop during
