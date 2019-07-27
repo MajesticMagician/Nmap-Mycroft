@@ -56,7 +56,7 @@ class TemplateSkill(MycroftSkill):
         ipaddr = str(ipAddress)
         ipaddr.replace(" ", "", 4)
         nm = nmap.PortScanner() # instantiate nmap.PortScanner object
-        scanresults = str(nm['192.168.0.1'].has_tcp(80))
+        scanresults = nm['192.168.0.1'].has_tcp(80)
         if('True' in scanresults):
             self.speak_dialog("nmap.scan", data={"results": "Port 80 is open"})
         else:
