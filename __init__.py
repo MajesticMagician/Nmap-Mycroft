@@ -69,7 +69,7 @@ class TemplateSkill(MycroftSkill):
 
                 lport = nm[host][proto].keys()
                 lport.sort()
-                for port in lport
+                for port in lport()
                     self.speak_dialog("nmap.scan", data={"results": host + nm[host][proto][port]['state']})
 
 
