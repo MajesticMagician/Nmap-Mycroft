@@ -65,6 +65,7 @@ class TemplateSkill(MycroftSkill):
         for scanned_hosts in nmap_report.hosts:
             print (scanned_hosts)
             self.speak_dialog("nmap.scan", data={"results": scanned_hosts})
+            self.speak_dialog("nmap.scan", data={"results": ipaddr})
     # The "stop" method defines what Mycroft does when told to stop during
     # the skill's execution. In this case, since the skill's functionality
     # is extremely simple, there is no need to override it.  If you DO
