@@ -10,7 +10,8 @@
 from adapt.intent import IntentBuilder
 from mycroft.skills.core import MycroftSkill, intent_handler
 from mycroft.util.log import LOG
-import nmap
+from libnmap.process import NmapProcess
+from libnmap.parser import NmapParser
 # Each skill is contained within its own class, which inherits base methods
 # from the MycroftSkill class.  You extend this class as shown below.
 
@@ -55,14 +56,14 @@ class TemplateSkill(MycroftSkill):
         ipAddress = message.data.get("IPADDRESS", None)
         ipaddr = str(ipAddress)
         ipaddr.replace(" ", "", 4)
-        nm = nmap.PortScanner() # instantiate nmap.PortScanner object
-        scanresults = nm['192.168.0.1'].has_tcp(80)
-        if('True' in scanresults):
-            self.speak_dialog("nmap.scan", data={"results": "Port 80 is open"})
-        else:
-            self.speak_dialog("nmap.scan", data={"results": "Port 80 is not open"})
+        nm = NmapProcess("127.0.0.1, scanme.nmap.org")
+        nm.run()
 
+        nmap_report = NmapParser.parse(nm.stdout)
 
+        for scanned_hosts in nmap_report.hosts:
+            print scanned_hosts
+            self.speak_dialog("nmap.scan", data={"results": scanned_hosts})
     # The "stop" method defines what Mycroft does when told to stop during
     # the skill's execution. In this case, since the skill's functionality
     # is extremely simple, there is no need to override it.  If you DO
