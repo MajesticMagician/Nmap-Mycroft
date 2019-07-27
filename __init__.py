@@ -66,8 +66,7 @@ class TemplateSkill(MycroftSkill):
                 lport = nmScan[host][proto].keys()
                 lport.sort()
                 for port in lport:
-                    print ('port : %s\tstate : %s' % (port, nmScan[host][proto][port]['state'])
-                    self.speak_dialog("nmap.scan", data={"results": 'port : %s\tstate : %s' % (port, nmScan[host][proto][port]['state']})
+                    print ('port : %s\tstate : %s' % (port, nmScan[host][proto][port]['state
 
         self.speak_dialog("nmap.scan", data={"results": })
 
