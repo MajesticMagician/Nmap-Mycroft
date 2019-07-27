@@ -56,9 +56,8 @@ class TemplateSkill(MycroftSkill):
         ipaddr = str(ipAddress)
         ipaddr.replace(" ", "", 4)
         nmScan = nmap.PortScanner()
-        nmScan.scan('127.0.0.1', '21-443')
-        print('Host : %s (%s)' % (host, nmScan[host].hostname()))
-
+        nmScan['127.0.0.1'].state()
+        
     # The "stop" method defines what Mycroft does when told to stop during
     # the skill's execution. In this case, since the skill's functionality
     # is extremely simple, there is no need to override it.  If you DO
