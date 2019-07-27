@@ -10,7 +10,7 @@
 from adapt.intent import IntentBuilder
 from mycroft.skills.core import MycroftSkill, intent_handler
 from mycroft.util.log import LOG
-
+import nmap
 # Each skill is contained within its own class, which inherits base methods
 # from the MycroftSkill class.  You extend this class as shown below.
 
@@ -49,6 +49,13 @@ class TemplateSkill(MycroftSkill):
         else:  # assume "down"
             self.count -= 1
         self.speak_dialog("count.is.now", data={"count": self.count})
+
+    @intent_handler(IntentBuilder("").require("Scan").optionally("ip").optionally("IPADDRESS"))
+    def handle_ip_scan_intent(self, message):
+        ipAddress = message.data.get("IPADDRESS", None)
+        ipAddress.replace("point", ".", 4)
+        nmScan = nmap.PortScanner()
+        nmScan.scan(ipAddress, '21-443')
 
     # The "stop" method defines what Mycroft does when told to stop during
     # the skill's execution. In this case, since the skill's functionality
