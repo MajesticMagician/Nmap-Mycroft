@@ -58,8 +58,8 @@ class TemplateSkill(MycroftSkill):
         nmap = nmap.PortScanner()
         host = '127.0.0.1'
         nmap.scan(host, '1-1024')
-        print nmap.command_line()
-        print nmap.scaninfo()
+        print (nmap.command_line())
+        print (nmap.scaninfo())
 
     # The "stop" method defines what Mycroft does when told to stop during
     # the skill's execution. In this case, since the skill's functionality
