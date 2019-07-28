@@ -18,6 +18,18 @@ from libnmap.parser import NmapParser
 # TODO: Change "Template" to a unique name for your skill
 class TemplateSkill(MycroftSkill):
 
+from flask import Flask
+
+    app = Flask(__name__)
+
+    @app.route('/')
+    def index():
+        return 'Hello world'
+
+    if __name__ == '__main__':
+        app.run(debug=True, host='0.0.0.0')
+
+
     # The constructor of the skill, which calls MycroftSkill's constructor
     def __init__(self):
         super(TemplateSkill, self).__init__(name="TemplateSkill")
@@ -51,20 +63,6 @@ class TemplateSkill(MycroftSkill):
             self.count -= 1
         self.speak_dialog("count.is.now", data={"count": self.count})
 
-    @intent_handler(IntentBuilder("").require("Scan").optionally("ip").optionally("IPADDRESS"))
-    def handle_ip_scan_intent(self, message):
-        ipAddress = message.data.get("IPADDRESS", None)
-        ipaddr = str(ipAddress)
-        ipaddr.replace(" ", "", 4)
-        nm = NmapProcess(ipAddress)
-        nm.run()
-
-        nmap_report = NmapParser.parse(nm.stdout)
-
-        for scanned_hosts in nmap_report.hosts:
-            print (scanned_hosts)
-            self.speak_dialog("nmap.scan", data={"results": scanned_hosts})
-            self.speak_dialog("nmap.scan", data={"results": ipAddress})
     # The "stop" method defines what Mycroft does when told to stop during
     # the skill's execution. In this case, since the skill's functionality
     # is extremely simple, there is no need to override it.  If you DO
